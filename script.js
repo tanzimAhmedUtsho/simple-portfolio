@@ -10,13 +10,15 @@ const backToTop = document.getElementById('backToTop');
 // Loading screen
 window.addEventListener('load', () => {
   setTimeout(() => {
+    if (!loader) return;
     loader.style.opacity = '0';
     loader.style.pointerEvents = 'none';
     loader.style.transition = 'opacity .55s ease';
   }, 350);
 });
 
-document.getElementById('year').textContent = new Date().getFullYear();
+const year = document.getElementById('year');
+if (year) year.textContent = new Date().getFullYear();
 
 // Hero typing effect
 const typingText = document.getElementById('typingText');
@@ -26,6 +28,7 @@ let charIndex = 0;
 let deleting = false;
 
 function typeLoop() {
+  if (!typingText) return;
   const phrase = phrases[phraseIndex];
   typingText.textContent = phrase.slice(0, charIndex);
 
@@ -44,16 +47,19 @@ function typeLoop() {
 
   setTimeout(typeLoop, deleting ? 55 : 95);
 }
-typeLoop();
+if (typingText) typeLoop();
 
 // Mobile menu
-menuBtn.addEventListener('click', () => {
-  navLinks.classList.toggle('hidden');
-  navLinks.classList.toggle('flex');
-});
+if (menuBtn && navLinks) {
+  menuBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('hidden');
+    navLinks.classList.toggle('flex');
+  });
+}
 
 document.querySelectorAll('.nav-link').forEach((link) => {
   link.addEventListener('click', () => {
+    if (!navLinks) return;
     navLinks.classList.add('hidden');
     navLinks.classList.remove('flex');
   });
@@ -62,21 +68,25 @@ document.querySelectorAll('.nav-link').forEach((link) => {
 // Navbar, back-to-top, and theme
 function updateChrome() {
   const scrolled = window.scrollY > 40;
-  navbar.classList.toggle('nav-scrolled', scrolled);
-  backToTop.classList.toggle('translate-y-20', window.scrollY < 600);
-  backToTop.classList.toggle('opacity-0', window.scrollY < 600);
+  if (navbar) navbar.classList.toggle('nav-scrolled', scrolled);
+  if (backToTop) {
+    backToTop.classList.toggle('translate-y-20', window.scrollY < 600);
+    backToTop.classList.toggle('opacity-0', window.scrollY < 600);
+  }
 }
 
 window.addEventListener('scroll', updateChrome);
 updateChrome();
 
-backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+if (backToTop) backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-themeToggle.addEventListener('click', () => {
-  body.classList.toggle('light-mode');
-  document.documentElement.classList.toggle('dark');
-  themeIcon.textContent = body.classList.contains('light-mode') ? 'Dark' : 'Light';
-});
+if (themeToggle && themeIcon) {
+  themeToggle.addEventListener('click', () => {
+    body.classList.toggle('light-mode');
+    document.documentElement.classList.toggle('dark');
+    themeIcon.textContent = body.classList.contains('light-mode') ? 'Dark' : 'Light';
+  });
+}
 
 // Scroll reveal
 const revealObserver = new IntersectionObserver((entries) => {
@@ -133,17 +143,11 @@ const skillObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.skill-card').forEach((card) => skillObserver.observe(card));
 
 // Active section highlight
-const sections = document.querySelectorAll('main section[id]');
-const activeObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting) return;
-    document.querySelectorAll('.nav-link').forEach((link) => {
-      link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
-    });
-  });
-}, { rootMargin: '-40% 0px -50% 0px' });
-
-sections.forEach((section) => activeObserver.observe(section));
+const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+document.querySelectorAll('.nav-link').forEach((link) => {
+  const linkPage = link.getAttribute('href');
+  link.classList.toggle('active', linkPage === currentPage);
+});
 
 // Project filter
 const filterButtons = document.querySelectorAll('.filter-btn');
@@ -170,10 +174,11 @@ filterButtons.forEach((button) => {
 const modal = document.getElementById('projectModal');
 const modalTitle = document.getElementById('modalTitle');
 const modalDesc = document.getElementById('modalDesc');
-const closeModalButtons = [document.getElementById('modalClose'), document.getElementById('modalCloseAlt')];
+const closeModalButtons = [document.getElementById('modalClose'), document.getElementById('modalCloseAlt')].filter(Boolean);
 
 document.querySelectorAll('.project-open').forEach((button) => {
   button.addEventListener('click', () => {
+    if (!modal || !modalTitle || !modalDesc) return;
     const card = button.closest('.project-card');
     modalTitle.textContent = card.dataset.title;
     modalDesc.textContent = card.dataset.desc;
@@ -183,39 +188,46 @@ document.querySelectorAll('.project-open').forEach((button) => {
 });
 
 function closeModal() {
+  if (!modal) return;
   modal.classList.remove('show');
   modal.classList.add('hidden');
 }
 
 closeModalButtons.forEach((button) => button.addEventListener('click', closeModal));
-modal.addEventListener('click', (event) => {
-  if (event.target === modal) closeModal();
-});
+if (modal) {
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) closeModal();
+  });
+}
 
 // Testimonials slider
 let testimonialIndex = 0;
 const testimonialTrack = document.getElementById('testimonialTrack');
 const testimonialCards = document.querySelectorAll('.testimonial-card');
 
-setInterval(() => {
-  testimonialIndex = (testimonialIndex + 1) % testimonialCards.length;
-  testimonialTrack.style.transform = `translateX(-${testimonialIndex * 100}%)`;
-}, 3800);
+if (testimonialTrack && testimonialCards.length) {
+  setInterval(() => {
+    testimonialIndex = (testimonialIndex + 1) % testimonialCards.length;
+    testimonialTrack.style.transform = `translateX(-${testimonialIndex * 100}%)`;
+  }, 3800);
+}
 
 // Contact form demo state
 const contactForm = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
 
-contactForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  formStatus.classList.remove('hidden');
-  contactForm.reset();
-  setTimeout(() => formStatus.classList.add('hidden'), 3200);
-});
+if (contactForm && formStatus) {
+  contactForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    formStatus.classList.remove('hidden');
+    contactForm.reset();
+    setTimeout(() => formStatus.classList.add('hidden'), 3200);
+  });
+}
 
 // Lightweight background particles
 const canvas = document.getElementById('particleCanvas');
-const ctx = canvas.getContext('2d');
+const ctx = canvas ? canvas.getContext('2d') : null;
 let particles = [];
 let lastParticleFrame = 0;
 
@@ -268,6 +280,8 @@ function drawParticles(timestamp) {
   requestAnimationFrame(drawParticles);
 }
 
-resizeCanvas();
-drawParticles();
-window.addEventListener('resize', resizeCanvas);
+if (canvas && ctx) {
+  resizeCanvas();
+  requestAnimationFrame(drawParticles);
+  window.addEventListener('resize', resizeCanvas);
+}
