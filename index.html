@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tanzim Ahmed - Web Developer and Data Analyst portfolio featuring web apps, dashboards, data visualization, business analytics, and UI/UX services.">
+  <meta name="keywords" content="Tanzim Ahmed, Web Developer, Data Analyst, Portfolio, JavaScript, React, Python, Power BI, SQL, Dashboard Designer">
+  <meta name="author" content="Tanzim Ahmed">
+  <meta property="og:title" content="Tanzim Ahmed | Web Developer & Data Analyst">
+  <meta property="og:description" content="Premium portfolio website for web development, dashboard design, and data analytics work.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/tanzim-ahmed.jpg">
+  <title>Tanzim Ahmed | Web Developer & Data Analyst</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Poppins', 'sans-serif']
+          },
+          colors: {
+            ink: '#060816',
+            panel: 'rgba(12, 18, 38, 0.72)',
+            electric: '#18d8ff',
+            violet: '#8b5cf6',
+            aurora: '#22c55e',
+            coral: '#fb7185'
+          },
+          boxShadow: {
+            glow: '0 0 38px rgba(24, 216, 255, 0.28)',
+            violet: '0 0 42px rgba(139, 92, 246, 0.3)'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-electric selection:text-ink">
+  <div id="loader" class="fixed inset-0 z-[100] grid place-items-center bg-slate-950">
+    <div class="text-center">
+      <div class="loader-ring mx-auto mb-6"></div>
+      <p class="font-display text-sm uppercase tracking-[0.35em] text-cyan-200">Launching Portfolio</p>
+    </div>
+  </div>
+
+  <div id="cursorGlow" class="pointer-events-none fixed left-0 top-0 z-[90] hidden h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-300/70 md:block"></div>
+  <canvas id="particleCanvas" class="fixed inset-0 -z-10 h-full w-full"></canvas>
+  <div class="fixed inset-0 -z-20 bg-[radial-gradient(circle_at_20%_20%,rgba(24,216,255,.14),transparent_28%),radial-gradient(circle_at_80%_10%,rgba(139,92,246,.14),transparent_30%),linear-gradient(135deg,#050816_0%,#0b1024_52%,#060816_100%)]"></div>
+
+  <header id="navbar" class="fixed left-0 right-0 top-0 z-50 border-b border-white/0 transition-all duration-300">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
+      <a href="#home" class="group flex items-center gap-3" aria-label="Tanzim Ahmed home">
+        <span class="grid h-11 w-11 place-items-center rounded-lg border border-cyan-300/30 bg-white/10 font-display text-lg font-bold text-cyan-100 shadow-glow backdrop-blur">TA</span>
+        <span class="hidden font-display text-lg font-bold sm:block">Tanzim Ahmed</span>
+      </a>
+      <button id="menuBtn" class="glass-btn grid h-11 w-11 place-items-center lg:hidden" aria-label="Open menu">
+        <span class="menu-line"></span>
+      </button>
+      <div id="navLinks" class="nav-panel absolute left-5 right-5 top-20 hidden flex-col gap-2 rounded-lg border border-white/10 bg-slate-950/90 p-4 shadow-2xl backdrop-blur-xl lg:static lg:flex lg:flex-row lg:items-center lg:gap-1 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none">
+        <a class="nav-link" href="#home">Home</a>
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#skills">Skills</a>
+        <a class="nav-link" href="#services">Services</a>
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#contact">Contact</a>
+        <button id="themeToggle" class="glass-btn ml-0 mt-2 inline-flex h-11 items-center justify-center gap-2 px-4 text-sm lg:ml-3 lg:mt-0" aria-label="Toggle dark or light mode">
+          <span id="themeIcon">Light</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="relative flex min-h-screen items-center overflow-hidden px-5 pt-28 lg:px-8">
+      <div class="mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.08fr_.92fr]">
+        <div class="reveal">
+          <p class="mb-5 inline-flex items-center gap-3 rounded-full border border-cyan-300/20 bg-white/10 px-4 py-2 text-sm font-medium text-cyan-100 backdrop-blur">
+            <span class="h-2 w-2 rounded-full bg-aurora shadow-[0_0_18px_rgba(34,197,94,.9)]"></span>
+            Available for web and analytics projects
+          </p>
+          <h1 class="font-display text-5xl font-extrabold leading-tight sm:text-6xl lg:text-7xl">
+            <span class="block text-white">Hi, I am</span>
+            <span class="premium-text block">Tanzim Ahmed</span>
+          </h1>
+          <h2 class="mt-5 min-h-[2.25rem] text-2xl font-semibold text-slate-200 sm:text-3xl">
+            <span id="typingText"></span><span class="typing-caret">|</span>
+          </h2>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+            I design polished web experiences and transform raw business data into clear, decision-ready dashboards. My work blends clean frontend engineering, analytical thinking, and a premium visual standard.
+          </p>
+          <div class="mt-9 flex flex-col gap-4 sm:flex-row">
+            <a href="#contact" class="gradient-btn inline-flex items-center justify-center rounded-lg px-7 py-4 font-semibold text-ink">Hire Me</a>
+            <a href="#projects" class="glass-btn inline-flex items-center justify-center rounded-lg px-7 py-4 font-semibold">View Projects</a>
+          </div>
+          <div class="mt-9 flex items-center gap-4" aria-label="Social links">
+            <a class="social-link" href="#" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0ZM.33 8.08h4.3V24H.33V8.08Zm7.33 0h4.12v2.18h.06c.57-1.08 1.98-2.22 4.08-2.22 4.36 0 5.16 2.87 5.16 6.6V24h-4.29v-8.3c0-1.98-.04-4.52-2.76-4.52-2.76 0-3.18 2.15-3.18 4.37V24H7.66V8.08Z"/></svg>
+            </a>
+            <a class="social-link" href="#" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.1c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.47.11-3.05 0 0 .97-.31 3.16 1.18a10.9 10.9 0 0 1 5.76 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+            </a>
+            <a class="social-link" href="mailto:tanzim@example.com" aria-label="Email">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="reveal relative mx-auto w-full max-w-[520px] lg:justify-self-end">
+          <div class="hero-frame parallax-card">
+            <div class="absolute -left-8 top-12 hidden rounded-lg border border-cyan-300/20 bg-white/10 px-4 py-3 backdrop-blur md:block">
+              <p class="text-xs text-slate-300">Analytics accuracy</p>
+              <p class="font-display text-2xl font-bold text-cyan-100">98%</p>
+            </div>
+            <div class="absolute -right-4 bottom-16 hidden rounded-lg border border-violet-300/20 bg-white/10 px-4 py-3 backdrop-blur md:block">
+              <p class="text-xs text-slate-300">UI delivery</p>
+              <p class="font-display text-2xl font-bold text-violet-100">Fast</p>
+            </div>
+            <img src="assets/tanzim-ahmed.jpg" alt="Tanzim Ahmed professional portrait" class="profile-img">
+          </div>
+          <div class="floating-tech left-4 top-4">HTML</div>
+          <div class="floating-tech right-3 top-28 delay-200">SQL</div>
+          <div class="floating-tech bottom-10 left-8 delay-500">Power BI</div>
+          <div class="floating-tech bottom-3 right-12 delay-700">React</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section-pad px-5 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="section-heading reveal">
+          <p>About Me</p>
+          <h2>Developer mindset with analyst precision</h2>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-[1fr_.9fr]">
+          <article class="glass-card reveal p-6 md:p-8">
+            <p class="text-lg leading-8 text-slate-300">
+              I am a Web Developer and Data Analyst focused on building responsive, elegant, and practical digital products. I work across HTML, Tailwind CSS, JavaScript, React, Python, Excel, Power BI, and SQL to create websites, dashboards, and analysis workflows that help people understand data faster.
+            </p>
+            <div class="mt-8 grid gap-4 sm:grid-cols-3">
+              <div class="mini-stat"><span data-counter="50">0</span><p>Projects Delivered</p></div>
+              <div class="mini-stat"><span data-counter="20">0</span><p>Happy Clients</p></div>
+              <div class="mini-stat"><span data-counter="3">0</span><p>Years Experience</p></div>
+            </div>
+          </article>
+          <div class="glass-card reveal p-6 md:p-8">
+            <h3 class="font-display text-2xl font-bold">Experience Highlights</h3>
+            <div class="timeline mt-7 space-y-6">
+              <div class="timeline-item">
+                <h4>Frontend Development</h4>
+                <p>Responsive interfaces, polished interactions, and production-ready web layouts.</p>
+              </div>
+              <div class="timeline-item">
+                <h4>Data Analysis</h4>
+                <p>Excel, SQL, Python, and Power BI workflows for clean reporting and insight generation.</p>
+              </div>
+              <div class="timeline-item">
+                <h4>Dashboard Storytelling</h4>
+                <p>Executive dashboards with clear KPIs, filters, trends, and actionable visuals.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section-pad px-5 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="section-heading reveal">
+          <p>Skills</p>
+          <h2>Modern tools for web and data work</h2>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-3">
+          <div class="skill-card reveal" data-tilt>
+            <div class="skill-icon">FE</div>
+            <h3>Frontend Development</h3>
+            <div class="skill-row" data-level="95"><span>HTML</span><b>95%</b><i></i></div>
+            <div class="skill-row" data-level="92"><span>Tailwind CSS</span><b>92%</b><i></i></div>
+            <div class="skill-row" data-level="88"><span>JavaScript</span><b>88%</b><i></i></div>
+            <div class="skill-row" data-level="82"><span>React</span><b>82%</b><i></i></div>
+          </div>
+          <div class="skill-card reveal" data-tilt>
+            <div class="skill-icon">DA</div>
+            <h3>Data Analysis</h3>
+            <div class="skill-row" data-level="90"><span>Excel</span><b>90%</b><i></i></div>
+            <div class="skill-row" data-level="86"><span>Power BI</span><b>86%</b><i></i></div>
+            <div class="skill-row" data-level="84"><span>SQL</span><b>84%</b><i></i></div>
+            <div class="skill-row" data-level="80"><span>Python</span><b>80%</b><i></i></div>
+          </div>
+          <div class="skill-card reveal" data-tilt>
+            <div class="skill-icon">BI</div>
+            <h3>Tools & Technologies</h3>
+            <div class="grid grid-cols-2 gap-4 pt-2">
+              <div class="circle-chart" data-percent="93"><span>93%</span><p>UI Build</p></div>
+              <div class="circle-chart" data-percent="88"><span>88%</span><p>Dashboards</p></div>
+              <div class="circle-chart" data-percent="84"><span>84%</span><p>Automation</p></div>
+              <div class="circle-chart" data-percent="91"><span>91%</span><p>Reporting</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section-pad px-5 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="section-heading reveal">
+          <p>Services</p>
+          <h2>Premium execution for practical outcomes</h2>
+        </div>
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <article class="service-card reveal"><span>01</span><h3>Web Development</h3><p>Fast, responsive, SEO-friendly websites with elegant user experiences.</p></article>
+          <article class="service-card reveal"><span>02</span><h3>Dashboard Design</h3><p>Interactive dashboards that turn KPIs into quick business decisions.</p></article>
+          <article class="service-card reveal"><span>03</span><h3>Data Visualization</h3><p>Readable charts, trends, and reports designed for real users.</p></article>
+          <article class="service-card reveal"><span>04</span><h3>Business Analytics</h3><p>Data cleaning, analysis, reporting, and insight presentation.</p></article>
+          <article class="service-card reveal"><span>05</span><h3>UI/UX Design</h3><p>Clean wireframes, polished layouts, and smooth micro-interactions.</p></article>
+          <article class="service-card reveal"><span>06</span><h3>Landing Pages</h3><p>High-converting pages for portfolios, services, and products.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section-pad px-5 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="section-heading reveal">
+          <p>Projects</p>
+          <h2>Selected work across web and analytics</h2>
+        </div>
+        <div class="reveal mb-8 flex flex-wrap gap-3">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="web">Web Apps</button>
+          <button class="filter-btn" data-filter="dashboard">Dashboards</button>
+          <button class="filter-btn" data-filter="analysis">Data Analysis</button>
+        </div>
+        <div id="projectGrid" class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <article class="project-card reveal" data-category="web" data-title="Premium Portfolio System" data-desc="A responsive personal brand website with animations, project filtering, modals, and a polished conversion-focused contact flow.">
+            <div class="project-visual bg-[linear-gradient(135deg,#18d8ff,#8b5cf6)]"><span>Web App</span></div>
+            <div class="p-6"><p>Web Apps</p><h3>Premium Portfolio System</h3><div><button class="project-open">Live Demo</button><a href="#">GitHub</a></div></div>
+          </article>
+          <article class="project-card reveal" data-category="dashboard" data-title="Sales Intelligence Dashboard" data-desc="Power BI style KPI dashboard concept with sales trends, revenue segments, top products, and executive summary cards.">
+            <div class="project-visual bg-[linear-gradient(135deg,#22c55e,#18d8ff)]"><span>Dashboard</span></div>
+            <div class="p-6"><p>Dashboards</p><h3>Sales Intelligence Dashboard</h3><div><button class="project-open">Live Demo</button><a href="#">GitHub</a></div></div>
+          </article>
+          <article class="project-card reveal" data-category="analysis" data-title="Customer Churn Analysis" data-desc="Python and SQL analysis workflow identifying churn drivers, customer cohorts, and retention opportunities.">
+            <div class="project-visual bg-[linear-gradient(135deg,#fb7185,#8b5cf6)]"><span>Analytics</span></div>
+            <div class="p-6"><p>Data Analysis</p><h3>Customer Churn Analysis</h3><div><button class="project-open">Live Demo</button><a href="#">GitHub</a></div></div>
+          </article>
+          <article class="project-card reveal" data-category="web" data-title="SaaS Landing Interface" data-desc="Startup-style landing page with pricing blocks, feature sections, FAQ, and conversion optimized CTA interactions.">
+            <div class="project-visual bg-[linear-gradient(135deg,#38bdf8,#64748b)]"><span>SaaS UI</span></div>
+            <div class="p-6"><p>Web Apps</p><h3>SaaS Landing Interface</h3><div><button class="project-open">Live Demo</button><a href="#">GitHub</a></div></div>
+          </article>
+          <article class="project-card reveal" data-category="dashboard" data-title="Finance KPI Control Room" data-desc="Financial dashboard concept for budget tracking, variance analysis, cashflow movement, and management reporting.">
+            <div class="project-visual bg-[linear-gradient(135deg,#f59e0b,#22c55e)]"><span>BI Report</span></div>
+            <div class="p-6"><p>Dashboards</p><h3>Finance KPI Control Room</h3><div><button class="project-open">Live Demo</button><a href="#">GitHub</a></div></div>
+          </article>
+          <article class="project-card reveal" data-category="analysis" data-title="Market Performance Study" data-desc="Excel and SQL based market performance analysis with segmentation, trend detection, and recommendation summary.">
+            <div class="project-visual bg-[linear-gradient(135deg,#14b8a6,#6366f1)]"><span>Research</span></div>
+            <div class="p-6"><p>Data Analysis</p><h3>Market Performance Study</h3><div><button class="project-open">Live Demo</button><a href="#">GitHub</a></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="stats" class="px-5 py-16 lg:px-8">
+      <div class="mx-auto grid max-w-7xl gap-5 sm:grid-cols-3">
+        <div class="stat-card reveal"><span data-counter="50">0</span><p>Projects</p></div>
+        <div class="stat-card reveal"><span data-counter="20">0</span><p>Clients</p></div>
+        <div class="stat-card reveal"><span data-counter="3">0</span><p>Years Experience</p></div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="section-pad px-5 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="section-heading reveal">
+          <p>Testimonials</p>
+          <h2>Trusted for detail, speed, and clarity</h2>
+        </div>
+        <div class="testimonial-shell reveal overflow-hidden">
+          <div id="testimonialTrack" class="flex">
+            <article class="testimonial-card"><p>"Tanzim created a dashboard that made our reporting faster and easier to understand."</p><h4>Business Client</h4><span>Analytics Project</span></article>
+            <article class="testimonial-card"><p>"The website felt premium, loaded quickly, and worked beautifully across devices."</p><h4>Startup Founder</h4><span>Web Development</span></article>
+            <article class="testimonial-card"><p>"Clear communication, polished design sense, and strong attention to business goals."</p><h4>Project Partner</h4><span>UI/UX Design</span></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section-pad px-5 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="section-heading reveal">
+          <p>Contact</p>
+          <h2>Let us build something sharp</h2>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-[.9fr_1.1fr]">
+          <div class="space-y-5 reveal">
+            <div class="contact-card"><span>Email</span><a href="mailto:tanzim@example.com">tanzim@example.com</a></div>
+            <div class="contact-card"><span>Location</span><p>Dhaka, Bangladesh</p></div>
+            <div class="map-placeholder">
+              <div class="map-pin"></div>
+              <p>Interactive map placeholder</p>
+            </div>
+          </div>
+          <form id="contactForm" class="glass-card reveal space-y-6 p-6 md:p-8">
+            <div class="floating-field">
+              <input id="name" type="text" required placeholder=" ">
+              <label for="name">Your Name</label>
+            </div>
+            <div class="floating-field">
+              <input id="email" type="email" required placeholder=" ">
+              <label for="email">Email Address</label>
+            </div>
+            <div class="floating-field">
+              <textarea id="message" rows="5" required placeholder=" "></textarea>
+              <label for="message">Project Details</label>
+            </div>
+            <button class="gradient-btn w-full rounded-lg px-7 py-4 font-semibold text-ink" type="submit">Send Message</button>
+            <p id="formStatus" class="hidden text-sm text-cyan-200">Thanks. Your message animation is ready for integration.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/10 px-5 py-8 lg:px-8">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 text-center text-sm text-slate-400 sm:flex-row">
+      <p>Copyright <span id="year"></span> Tanzim Ahmed. All rights reserved.</p>
+      <div class="flex items-center gap-3">
+        <a class="footer-link" href="#home">Home</a>
+        <a class="footer-link" href="#projects">Projects</a>
+        <a class="footer-link" href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="fixed bottom-6 right-6 z-40 grid h-12 w-12 translate-y-20 place-items-center rounded-lg border border-cyan-300/30 bg-cyan-300 text-ink opacity-0 shadow-glow transition-all" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 15 6-6 6 6"/></svg>
+  </button>
+
+  <div id="projectModal" class="modal fixed inset-0 z-[80] hidden items-center justify-center bg-slate-950/80 px-5 backdrop-blur">
+    <div class="glass-card max-w-2xl p-6 md:p-8">
+      <div class="flex items-start justify-between gap-6">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[.2em] text-cyan-200">Project Preview</p>
+          <h3 id="modalTitle" class="mt-3 font-display text-3xl font-bold"></h3>
+        </div>
+        <button id="modalClose" class="glass-btn grid h-11 w-11 place-items-center" aria-label="Close project modal">x</button>
+      </div>
+      <p id="modalDesc" class="mt-5 leading-8 text-slate-300"></p>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a href="#contact" class="gradient-btn rounded-lg px-5 py-3 font-semibold text-ink">Discuss Similar Project</a>
+        <button id="modalCloseAlt" class="glass-btn rounded-lg px-5 py-3 font-semibold">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
