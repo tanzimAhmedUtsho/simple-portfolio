@@ -56,23 +56,26 @@
   <div class="fixed inset-0 -z-20 bg-[radial-gradient(circle_at_20%_20%,rgba(24,216,255,.14),transparent_28%),radial-gradient(circle_at_80%_10%,rgba(139,92,246,.14),transparent_30%),linear-gradient(135deg,#050816_0%,#0b1024_52%,#060816_100%)]"></div>
 
   <!-- Header / Navigation -->
-  <header id="navbar" class="fixed left-0 right-0 top-0 z-50 border-b border-white/0 transition-all duration-300">
-    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
-      <a href="#home" class="group flex items-center gap-3" aria-label="Tanzim Ahmed home">
-        <span class="grid h-11 w-11 place-items-center rounded-lg border border-cyan-300/30 bg-white/10 font-display text-lg font-bold text-cyan-100 shadow-glow backdrop-blur">TA</span>
-        <span class="hidden font-display text-lg font-bold sm:block">Tanzim Ahmed</span>
+  <header id="navbar" class="fixed left-0 right-0 top-0 z-50 transition-all duration-300">
+    <nav class="nav-shell mx-auto mt-4 flex max-w-7xl items-center justify-between px-4 py-3 lg:px-5">
+      <a href="#home" class="brand-link group flex items-center gap-3" aria-label="Tanzim Ahmed home">
+        <span class="brand-mark grid h-11 w-11 place-items-center rounded-lg font-display text-lg font-bold">TA</span>
+        <span class="leading-tight">
+          <span class="block font-display text-base font-bold text-white sm:text-lg">Tanzim Ahmed</span>
+          <span class="hidden text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200/80 sm:block">Web Developer</span>
+        </span>
       </a>
       <button id="menuBtn" class="glass-btn grid h-11 w-11 place-items-center lg:hidden" aria-label="Open menu">
         <span class="menu-line"></span>
       </button>
-      <div id="navLinks" class="nav-panel absolute left-5 right-5 top-20 hidden flex-col gap-2 rounded-lg border border-white/10 bg-slate-950/90 p-4 shadow-2xl backdrop-blur-xl lg:static lg:flex lg:flex-row lg:items-center lg:gap-1 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none">
-        <a class="nav-link" href="#home">Home</a>
-        <a class="nav-link" href="#about">About</a>
-        <a class="nav-link" href="#skills">Skills</a>
-        <a class="nav-link" href="#services">Services</a>
-        <a class="nav-link" href="#projects">Projects</a>
-        <a class="nav-link" href="#contact">Contact</a>
-        <button id="themeToggle" class="glass-btn ml-0 mt-2 inline-flex h-11 items-center justify-center gap-2 px-4 text-sm lg:ml-3 lg:mt-0" aria-label="Toggle dark or light mode">
+      <div id="navLinks" class="nav-panel absolute left-5 right-5 top-20 hidden flex-col gap-2 rounded-lg p-4 shadow-2xl lg:static lg:flex lg:flex-row lg:items-center lg:gap-2 lg:p-1.5 lg:shadow-none">
+        <a class="nav-link" href="#home"><span>Home</span></a>
+        <a class="nav-link" href="#about"><span>About</span></a>
+        <a class="nav-link" href="#skills"><span>Skills</span></a>
+        <a class="nav-link" href="#services"><span>Services</span></a>
+        <a class="nav-link" href="#projects"><span>Projects</span></a>
+        <a class="nav-link" href="#contact"><span>Contact</span></a>
+        <button id="themeToggle" class="theme-toggle ml-0 mt-2 inline-flex h-11 items-center justify-center gap-2 px-4 text-sm lg:ml-2 lg:mt-0" aria-label="Toggle dark or light mode">
           <span id="themeIcon">Light</span>
         </button>
       </div>
