@@ -1,6 +1,5 @@
 const body = document.body;
 const loader = document.getElementById('loader');
-const cursorGlow = document.getElementById('cursorGlow');
 const navbar = document.getElementById('navbar');
 const menuBtn = document.getElementById('menuBtn');
 const navLinks = document.getElementById('navLinks');
@@ -8,16 +7,18 @@ const themeToggle = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');
 const backToTop = document.getElementById('backToTop');
 
+// Loading screen
 window.addEventListener('load', () => {
   setTimeout(() => {
     loader.style.opacity = '0';
     loader.style.pointerEvents = 'none';
     loader.style.transition = 'opacity .55s ease';
-  }, 650);
+  }, 350);
 });
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Hero typing effect
 const typingText = document.getElementById('typingText');
 const phrases = ['Web Developer & Data Analyst', 'Dashboard Designer', 'Frontend Experience Builder', 'Business Intelligence Storyteller'];
 let phraseIndex = 0;
@@ -41,10 +42,11 @@ function typeLoop() {
     phraseIndex = (phraseIndex + 1) % phrases.length;
   }
 
-  setTimeout(typeLoop, deleting ? 42 : 78);
+  setTimeout(typeLoop, deleting ? 55 : 95);
 }
 typeLoop();
 
+// Mobile menu
 menuBtn.addEventListener('click', () => {
   navLinks.classList.toggle('hidden');
   navLinks.classList.toggle('flex');
@@ -57,6 +59,7 @@ document.querySelectorAll('.nav-link').forEach((link) => {
   });
 });
 
+// Navbar, back-to-top, and theme
 function updateChrome() {
   const scrolled = window.scrollY > 40;
   navbar.classList.toggle('nav-scrolled', scrolled);
@@ -75,15 +78,7 @@ themeToggle.addEventListener('click', () => {
   themeIcon.textContent = body.classList.contains('light-mode') ? 'Dark' : 'Light';
 });
 
-window.addEventListener('mousemove', (event) => {
-  cursorGlow.style.transform = `translate(${event.clientX}px, ${event.clientY}px) translate(-50%, -50%)`;
-});
-
-document.querySelectorAll('a, button, .project-card, .skill-card').forEach((item) => {
-  item.addEventListener('mouseenter', () => cursorGlow.classList.add('active'));
-  item.addEventListener('mouseleave', () => cursorGlow.classList.remove('active'));
-});
-
+// Scroll reveal
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
@@ -95,6 +90,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach((item) => revealObserver.observe(item));
 
+// Counters
 const counterObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (!entry.isIntersecting) return;
@@ -116,6 +112,7 @@ const counterObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('[data-counter]').forEach((counter) => counterObserver.observe(counter));
 
+// Skill bars and circular charts
 const skillObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (!entry.isIntersecting) return;
@@ -135,20 +132,7 @@ const skillObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.skill-card').forEach((card) => skillObserver.observe(card));
 
-document.querySelectorAll('[data-tilt]').forEach((card) => {
-  card.addEventListener('mousemove', (event) => {
-    const rect = card.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    const rotateX = ((y / rect.height) - 0.5) * -8;
-    const rotateY = ((x / rect.width) - 0.5) * 8;
-    card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
-  });
-});
-
+// Active section highlight
 const sections = document.querySelectorAll('main section[id]');
 const activeObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
@@ -161,6 +145,7 @@ const activeObserver = new IntersectionObserver((entries) => {
 
 sections.forEach((section) => activeObserver.observe(section));
 
+// Project filter
 const filterButtons = document.querySelectorAll('.filter-btn');
 const projectCards = document.querySelectorAll('.project-card');
 
@@ -181,6 +166,7 @@ filterButtons.forEach((button) => {
   });
 });
 
+// Project modal
 const modal = document.getElementById('projectModal');
 const modalTitle = document.getElementById('modalTitle');
 const modalDesc = document.getElementById('modalDesc');
@@ -206,6 +192,7 @@ modal.addEventListener('click', (event) => {
   if (event.target === modal) closeModal();
 });
 
+// Testimonials slider
 let testimonialIndex = 0;
 const testimonialTrack = document.getElementById('testimonialTrack');
 const testimonialCards = document.querySelectorAll('.testimonial-card');
@@ -215,6 +202,7 @@ setInterval(() => {
   testimonialTrack.style.transform = `translateX(-${testimonialIndex * 100}%)`;
 }, 3800);
 
+// Contact form demo state
 const contactForm = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
 
@@ -225,30 +213,32 @@ contactForm.addEventListener('submit', (event) => {
   setTimeout(() => formStatus.classList.add('hidden'), 3200);
 });
 
-window.addEventListener('scroll', () => {
-  const parallax = document.querySelector('.parallax-card');
-  if (!parallax) return;
-  parallax.style.transform = `translateY(${window.scrollY * -0.025}px)`;
-});
-
+// Lightweight background particles
 const canvas = document.getElementById('particleCanvas');
 const ctx = canvas.getContext('2d');
 let particles = [];
+let lastParticleFrame = 0;
 
 function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  const count = Math.min(Math.floor(window.innerWidth / 18), 90);
+  const count = window.innerWidth < 768 ? 18 : 36;
   particles = Array.from({ length: count }, () => ({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
-    vx: (Math.random() - 0.5) * 0.35,
-    vy: (Math.random() - 0.5) * 0.35,
-    radius: Math.random() * 1.8 + 0.8
+    vx: (Math.random() - 0.5) * 0.18,
+    vy: (Math.random() - 0.5) * 0.18,
+    radius: Math.random() * 1.2 + 0.6
   }));
 }
 
-function drawParticles() {
+function drawParticles(timestamp) {
+  if (timestamp - lastParticleFrame < 33) {
+    requestAnimationFrame(drawParticles);
+    return;
+  }
+
+  lastParticleFrame = timestamp;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   particles.forEach((particle, index) => {
     particle.x += particle.vx;
@@ -262,14 +252,14 @@ function drawParticles() {
     ctx.fillStyle = 'rgba(103, 232, 249, .65)';
     ctx.fill();
 
-    for (let next = index + 1; next < particles.length; next += 1) {
+    for (let next = index + 1; next < particles.length; next += 2) {
       const other = particles[next];
       const distance = Math.hypot(particle.x - other.x, particle.y - other.y);
-      if (distance < 120) {
+      if (distance < 90) {
         ctx.beginPath();
         ctx.moveTo(particle.x, particle.y);
         ctx.lineTo(other.x, other.y);
-        ctx.strokeStyle = `rgba(139, 92, 246, ${0.14 - distance / 900})`;
+        ctx.strokeStyle = `rgba(139, 92, 246, ${0.09 - distance / 1200})`;
         ctx.lineWidth = 1;
         ctx.stroke();
       }
